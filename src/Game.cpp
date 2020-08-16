@@ -109,7 +109,7 @@ void Game::Destroy() {
 void Game::LoadLevel(int level){
 
 
-  std::string textureFilePath = "./assets/images/tank-big-right.png";
+  std::string textureFilePath = "../assets/images/tank-big-right.png";
   assetManager->AddTexture("tank-image", textureFilePath.c_str());
 
   Entity& newEntity(manager.AddEntity("tank"));

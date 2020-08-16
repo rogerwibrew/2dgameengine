@@ -1,10 +1,10 @@
 #ifndef TRANSFORMCOMPONENT_HPP
 #define TRANSFORMCOMPONENT_HPP
 
-#include "../Component.hpp"
+// #include "../Component.hpp"
 #include "../EntityManager.hpp"
 #include "../../lib/glm/glm.hpp"
-#include "../Game.hpp"
+// #include "../Game.hpp"
 
 class TransformComponent : public Component {
 
@@ -34,14 +34,6 @@ public:
   }
 
   void Render() override {
-    SDL_Rect transformRectangle = {
-      (int) position.x,
-      (int) position.y,
-      width,
-      height
-    };
-    SDL_SetRenderDrawColor(Game::renderer, 255, 255, 255, 255);
-    SDL_RenderFillRect(Game::renderer, &transformRectangle);
   }
 
 std::string GetComponentType() override {

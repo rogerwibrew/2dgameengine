@@ -1,7 +1,13 @@
-#include "Game.hpp"
+#include <iostream>
+#include "./Constants.hpp"
+#include "./Game.hpp"
+#include "./AssetManager.hpp"
 #include "./Components/TransformComponent.hpp"
+#include "./Components/SpriteComponent.hpp"
+#include "../lib/glm/glm.hpp"
 
 EntityManager manager;
+AssetManager* Game::assetManager = new AssetManager(&manager);
 SDL_Renderer* Game::renderer;
 
 Game::Game() {
@@ -102,21 +108,31 @@ void Game::Destroy() {
 
 void Game::LoadLevel(int level){
 
-  Entity& newEntityA(manager.AddEntity("projectileA"));
-  newEntityA.AddComponent<TransformComponent>(0,0,20,20,32,32,1);
+
+  std::string textureFilePath = "./assets/images/tank-big-right.png";
+  assetManager->AddTexture("tank-image", textureFilePath.c_str());
+
+  Entity& newEntity(manager.AddEntity("tank"));
+  newEntity.AddComponent<TransformComponent>(0,0,20,20,32,32,1);
+  newEntity.AddComponent<SpriteComponent>("tank-image");
 
 
-  Entity& newEntityB(manager.AddEntity("projectileB"));
-  newEntityB.AddComponent<TransformComponent>(0,0,30,30,32,32,1);
 
-  Entity& newEntityC(manager.AddEntity("projectileC"));
-  newEntityC.AddComponent<TransformComponent>(400,0,0,20,32,32,1);
+  /* Entity& newEntityA(manager.AddEntity("projectileA")); */
+  /* newEntityA.AddComponent<TransformComponent>(0,0,20,20,32,32,1); */
 
-  Entity& newEntityD(manager.AddEntity("projectileD"));
-  newEntityD.AddComponent<TransformComponent>(800,0,-20,20,32,32,1);
 
-  Entity& newEntityE(manager.AddEntity("projectileE"));
-  newEntityE.AddComponent<TransformComponent>(400,600,0,-20,32,32,1);
+  /* Entity& newEntityB(manager.AddEntity("projectileB")); */
+  /* newEntityB.AddComponent<TransformComponent>(0,0,30,30,32,32,1); */
+
+  /* Entity& newEntityC(manager.AddEntity("projectileC")); */
+  /* newEntityC.AddComponent<TransformComponent>(400,0,0,20,32,32,1); */
+
+  /* Entity& newEntityD(manager.AddEntity("projectileD")); */
+  /* newEntityD.AddComponent<TransformComponent>(800,0,-20,20,32,32,1); */
+
+  /* Entity& newEntityE(manager.AddEntity("projectileE")); */
+  /* newEntityE.AddComponent<TransformComponent>(400,600,0,-20,32,32,1); */
 }
   
 void Game::ListEntities() {

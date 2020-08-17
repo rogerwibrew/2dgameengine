@@ -4,11 +4,9 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
-
-
-#include "EntityManager.hpp"
-#include "Component.hpp"
 #include "Entity.hpp"
+#include "Component.hpp"
+#include "EntityManager.hpp"
 
 class AssetManager;
 
@@ -17,8 +15,6 @@ class Game {
 private:
   bool isRunning; 
   SDL_Window *window;
-
-  void ListEntities();
 
 public:
 

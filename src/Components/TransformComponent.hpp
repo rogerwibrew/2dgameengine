@@ -1,10 +1,10 @@
 #ifndef TRANSFORMCOMPONENT_HPP
 #define TRANSFORMCOMPONENT_HPP
 
-// #include "../Component.hpp"
+#include <SDL2/SDL.h>
 #include "../EntityManager.hpp"
 #include "../../lib/glm/glm.hpp"
-// #include "../Game.hpp"
+#include "../Game.hpp"
 
 class TransformComponent : public Component {
 
@@ -35,12 +35,5 @@ public:
 
   void Render() override {
   }
-
-std::string GetComponentType() override {
-  std::string type = "Transfrom";
-  return type;
-}
 };
- 
-
 #endif // TRANSFORMCOMPONENT_HPP

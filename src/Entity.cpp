@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Entity.hpp"
 
 Entity::Entity(EntityManager& manager):
@@ -34,4 +35,11 @@ bool Entity::IsActive() const {
 
 std::vector<Component*> Entity::GetComponents() const{
   return components; 
+}
+
+void Entity::ListAllComponents() const {
+  for (auto& mapElement : componentTypeMap) {
+    std::cout << "  Component<" << mapElement.first->name()
+                                                            <<  ">" << std::endl;
+  }
 }

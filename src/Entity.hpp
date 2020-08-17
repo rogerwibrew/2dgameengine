@@ -1,12 +1,12 @@
 #ifndef ENTITY_HPP
 #define ENTITY_HPP
 
+#include <typeinfo>
 #include <vector>
 #include <string>
 #include <map>
-
-#include "Component.hpp"
 #include "EntityManager.hpp"
+#include "Component.hpp"
 
 class Component;
 class EntityManager;
@@ -20,14 +20,15 @@ private:
   std::map<const std::type_info*, Component*> componentTypeMap;
 
 public:
-  std::string name;
   Entity(EntityManager& manager);
   Entity(EntityManager& manager, std::string name);
+  std::string name;
   void Update(float deltaTime);
   void Render();
   void Destroy();
   bool IsActive() const;
   std::vector<Component*> GetComponents() const;
+  void ListAllComponents() const;
 
   template <typename T, typename... TArgs>
     T& AddComponent(TArgs&&... args){
@@ -44,5 +45,17 @@ public:
     T* GetComponent() {
       return static_cast<T*>(componentTypeMap[&typeid(T)]);
     }
+
+  /* template <typename T> */
+  /*   /1* bool HasComponent() const { *1/ */
+    /*   const std::type_info* type = &typeid(T); */
+    /*   std::map<const std::type_info*, Component*>::iterator it; */
+    /*   it = componentTypeMap.find(type); */
+    /*   if(it != componentTypeMap.end()) { */
+    /*     return true; */
+    /*   } */
+    /*   return false; */
+    /* } */
 };
+
 #endif  // ENTITY_HPP

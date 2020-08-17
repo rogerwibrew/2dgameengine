@@ -9,7 +9,6 @@ public:
   virtual void Initalise() {}
   virtual void Update(float deltaTime) {}
   virtual void Render() {}
-  virtual std::string GetComponentType() {}
 
   Entity *owner;
 

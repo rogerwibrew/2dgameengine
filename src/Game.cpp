@@ -5,6 +5,7 @@
 #include "./Components/TransformComponent.hpp"
 #include "./Components/SpriteComponent.hpp"
 #include "../lib/glm/glm.hpp"
+#include "Entity.hpp"
 
 EntityManager manager;
 AssetManager* Game::assetManager = new AssetManager(&manager);
@@ -43,12 +44,8 @@ void Game::Initalise(int width, int height) {
     std::cerr << "Error creating SDL Renderer." << std:: endl;
     return;
   }
-
   LoadLevel(0);
-
-  ListEntities();
-
-  
+  manager.ListAllEntities(); 
   isRunning = true;
   return;
 }
@@ -69,34 +66,24 @@ void Game::ProcessInput(){
 }
 
 void Game::Update(){
-
   int timeToWait = TARGET_FRAME_TIME - (SDL_GetTicks() - ticksLastFrame);
-
   if(timeToWait > 0 && timeToWait <= TARGET_FRAME_TIME) {
     SDL_Delay(timeToWait);
   }
-
   float deltaTime = (SDL_GetTicks() - ticksLastFrame) / 1000.0f;
-
   deltaTime = (deltaTime > 0.05f ? 0.05f : deltaTime);
-
   ticksLastFrame = SDL_GetTicks();
-
   manager.Update(deltaTime);
-
-
 }
 
 
 void Game::Render() {
   SDL_SetRenderDrawColor(renderer,21,21,21,255);
   SDL_RenderClear(renderer);
-
   if(manager.HasNoEntities()){
     return;
   }
   manager.Render();
-
   SDL_RenderPresent(renderer);
 }
 
@@ -107,43 +94,14 @@ void Game::Destroy() {
 }
 
 void Game::LoadLevel(int level){
+  assetManager->AddTexture("tank-image", std::string("../assets/images/tank-big-right.png").c_str());
+  assetManager->AddTexture("chopper-image", std::string("../assets/images/chopper-spritesheet.png").c_str());
 
+  Entity& tankEntity(manager.AddEntity("tank"));
+  tankEntity.AddComponent<TransformComponent>(0,0,20,20,32,32,1);
+  tankEntity.AddComponent<SpriteComponent>("tank-image");
 
-  std::string textureFilePath = "../assets/images/tank-big-right.png";
-  assetManager->AddTexture("tank-image", textureFilePath.c_str());
-
-  Entity& newEntity(manager.AddEntity("tank"));
-  newEntity.AddComponent<TransformComponent>(0,0,20,20,32,32,1);
-  newEntity.AddComponent<SpriteComponent>("tank-image");
-
-
-
-  /* Entity& newEntityA(manager.AddEntity("projectileA")); */
-  /* newEntityA.AddComponent<TransformComponent>(0,0,20,20,32,32,1); */
-
-
-  /* Entity& newEntityB(manager.AddEntity("projectileB")); */
-  /* newEntityB.AddComponent<TransformComponent>(0,0,30,30,32,32,1); */
-
-  /* Entity& newEntityC(manager.AddEntity("projectileC")); */
-  /* newEntityC.AddComponent<TransformComponent>(400,0,0,20,32,32,1); */
-
-  /* Entity& newEntityD(manager.AddEntity("projectileD")); */
-  /* newEntityD.AddComponent<TransformComponent>(800,0,-20,20,32,32,1); */
-
-  /* Entity& newEntityE(manager.AddEntity("projectileE")); */
-  /* newEntityE.AddComponent<TransformComponent>(400,600,0,-20,32,32,1); */
-}
-  
-void Game::ListEntities() {
-  std::vector<Entity*> entities = manager.GetEntities();
-  
-  for (auto& entity : entities){
-    std::cout << "Entity Name: " << entity->name << std::endl;
-    std::vector<Component*> components = entity->GetComponents();
-    for(auto& component : components){
-      std:: string type = component->GetComponentType();    
-        std::cout << '\t' << "Component Type " << type << std::endl;
-    }
-  }
+  Entity& chopperEntity(manager.AddEntity("chopper"));
+  chopperEntity.AddComponent<TransformComponent>(240, 106,0,0,32,32,1);
+  chopperEntity.AddComponent<SpriteComponent>("chopper-image",2,90,true,false);
 }

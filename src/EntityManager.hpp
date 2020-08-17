@@ -1,9 +1,10 @@
 #ifndef ENTITYMANAGER_HPP
 #define ENTITYMANAGER_HPP
 
-#include <vector>
 #include "Entity.hpp"
 #include "Component.hpp"
+#include <vector>
+#include <iostream>
 
 class EntityManager {
 private:
@@ -16,6 +17,7 @@ public:
   Entity& AddEntity(std::string entityName);
   std::vector<Entity*> GetEntities() const;
   unsigned int GetEntityCount() const;
+  void ListAllEntities() const;
 };
 
 #endif // ENTITYMANAGER_HPP

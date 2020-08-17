@@ -65,7 +65,7 @@ public:
     numFrames = animations[animationName].numFrames;
     animationIndex = animations[animationName].index;
     animationSpeed = animations[animationName].animationSpeed;
-    currentAnimationName = animationName;
+//    currentAnimationName = animationName;
   }
 
   void SetTexture(std::string assetTextureID){

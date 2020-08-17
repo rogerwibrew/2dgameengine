@@ -4,12 +4,14 @@
 #include "./AssetManager.hpp"
 #include "./Components/TransformComponent.hpp"
 #include "./Components/SpriteComponent.hpp"
+#include "./Components/KeyboardControlComponent.hpp"
 #include "../lib/glm/glm.hpp"
 #include "Entity.hpp"
 
 EntityManager manager;
 AssetManager* Game::assetManager = new AssetManager(&manager);
 SDL_Renderer* Game::renderer;
+SDL_Event Game::event;
 
 Game::Game() {
   isRunning = false;
@@ -51,7 +53,6 @@ void Game::Initalise(int width, int height) {
 }
 
 void Game::ProcessInput(){
-  SDL_Event event;
   SDL_PollEvent(&event);
   switch (event.type) {
     case SDL_QUIT:
@@ -104,4 +105,5 @@ void Game::LoadLevel(int level){
   Entity& chopperEntity(manager.AddEntity("chopper"));
   chopperEntity.AddComponent<TransformComponent>(240, 106,0,0,32,32,1);
   chopperEntity.AddComponent<SpriteComponent>("chopper-image",2,90,true,false);
+  chopperEntity.AddComponent<KeyboardControlComponent>("up", "right", "down", "left", "space");
 }

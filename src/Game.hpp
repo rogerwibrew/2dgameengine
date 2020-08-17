@@ -22,6 +22,7 @@ public:
   ~Game();
   static SDL_Renderer *renderer;
   static AssetManager *assetManager;
+  static SDL_Event event;
   void LoadLevel(int level);
   void Initalise(int width, int height);
   void ProcessInput();

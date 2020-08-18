@@ -85,8 +85,8 @@ public:
       srcRectangle.x = srcRectangle.w * static_cast<int>((SDL_GetTicks() / animationSpeed) % numFrames);
     }
     srcRectangle.y = animationIndex * transform->height;
-    dstRectangle.x = static_cast<int>(transform->position.x)- Game::camera.x;
-    dstRectangle.y = static_cast<int>(transform->position.y) - Game::camera.y;
+    dstRectangle.x = static_cast<int>(transform->position.x)- (isFixed ? 0 : Game::camera.x);
+    dstRectangle.y = static_cast<int>(transform->position.y) - (isFixed ? 0: Game::camera.y);
     dstRectangle.w = transform->width * transform->scale;
     dstRectangle.h = transform->height * transform->scale;
   }

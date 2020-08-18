@@ -7,10 +7,11 @@ Entity::Entity(EntityManager& manager):
 {}
 
 
-Entity::Entity(EntityManager& manager, std::string name):
+Entity::Entity(EntityManager& manager, std::string name, LayerType layer):
   manager{manager},
   isActive{true},
-  name{name}
+  name{name},
+  layer{layer}
 {}
 
 void Entity::Update(float deltaTime){

@@ -7,7 +7,8 @@
 #include "../Game.hpp"
 #include <SDL2/SDL.h>
 #include <iostream>
-class TileComponent : public Component {
+class TileComponent : public Component
+{
 public:
   SDL_Texture *texture;
   SDL_Rect srcRectangle;
@@ -15,7 +16,8 @@ public:
   glm::vec2 position;
 
   TileComponent(int sourceRectX, int sourceRectY, int x, int y, int tileSize,
-                int tileScale, std::string assetTextureId) {
+                int tileScale, std::string assetTextureId)
+  {
     texture = Game::assetManager->GetTexture(assetTextureId);
     srcRectangle.x = sourceRectX;
     srcRectangle.y = sourceRectY;
@@ -25,14 +27,14 @@ public:
     dstRectangle.y = y;
     dstRectangle.w = tileSize * tileScale;
     dstRectangle.h = tileSize * tileScale;
-
     position.x = x;
     position.y = y;
   }
   ~TileComponent() { SDL_DestroyTexture(texture); }
   void Update(float deltaTime) override {}
 
-  void Render() override {
+  void Render() override
+  {
     TextureManager::Draw(texture, srcRectangle, dstRectangle, SDL_FLIP_NONE);
   }
 };

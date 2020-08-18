@@ -31,7 +31,10 @@ public:
     position.y = y;
   }
   ~TileComponent() { SDL_DestroyTexture(texture); }
-  void Update(float deltaTime) override {}
+  void Update(float deltaTime) override {
+    dstRectangle.x = position.x - Game::camera.x;
+    dstRectangle.y = position.y - Game::camera.y;
+  }
 
   void Render() override
   {

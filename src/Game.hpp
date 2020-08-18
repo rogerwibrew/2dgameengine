@@ -33,6 +33,7 @@ public:
   bool IsRunning() const;
   int ticksLastFrame = 0;
   void HandleCameraMovement();
+  void CheckCollisions();
 };
 
 #endif  // GAME_HPP

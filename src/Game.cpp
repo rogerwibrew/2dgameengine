@@ -2,6 +2,7 @@
 #include "./Constants.hpp"
 #include "./Game.hpp"
 #include "./AssetManager.hpp"
+#include "./Map.hpp"
 #include "./Components/TransformComponent.hpp"
 #include "./Components/SpriteComponent.hpp"
 #include "./Components/KeyboardControlComponent.hpp"
@@ -12,6 +13,7 @@ EntityManager manager;
 AssetManager* Game::assetManager = new AssetManager(&manager);
 SDL_Renderer* Game::renderer;
 SDL_Event Game::event;
+Map* map;
 
 Game::Game() {
   isRunning = false;
@@ -97,6 +99,10 @@ void Game::Destroy() {
 void Game::LoadLevel(int level){
   assetManager->AddTexture("tank-image", std::string("../assets/images/tank-big-right.png").c_str());
   assetManager->AddTexture("chopper-image", std::string("../assets/images/chopper-spritesheet.png").c_str());
+  assetManager->AddTexture("jungle-tiletexture", std::string("../assets/tilemaps/jungle.png").c_str());
+
+  map = new Map(std::string("jungle-tiletexture"), 1, 32);
+  map->LoadMap(std::string("../assets/tilemaps/jungle.map"), 25, 20);
 
   Entity& tankEntity(manager.AddEntity("tank"));
   tankEntity.AddComponent<TransformComponent>(0,0,20,20,32,32,1);

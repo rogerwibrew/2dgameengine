@@ -34,6 +34,8 @@ public:
   int ticksLastFrame = 0;
   void HandleCameraMovement();
   void CheckCollisions();
+  void ProcessGameOver();
+  void ProcessNextLevel(int level);
 };
 
 #endif  // GAME_HPP
